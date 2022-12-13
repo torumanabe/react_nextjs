@@ -3,6 +3,7 @@ import { Footer } from "../components/Footer";
 import { Main } from "../components/Main";
 import { Header } from "../components/Header";
 import styles from "./styles/Home.module.css";
+import { useCallback, useEffect } from "react";
 
 const handleClick = (e) => {
   e.preventDefault();
@@ -10,6 +11,14 @@ const handleClick = (e) => {
 };
 
 export default function Home() {
+  useEffect(() => {
+    document.body.style.backgroundColor = "lightblue";
+
+    return () => {
+      document.body.style.backgroundColor = "";
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
