@@ -3,48 +3,15 @@ import { Footer } from "../components/Footer";
 import { Main } from "../components/Main";
 import { Header } from "../components/Header";
 import styles from "./styles/Home.module.css";
-import { useCallback, useEffect, useState } from "react";
-
+import { useCounter } from "../hooks/useCounter";
+import { useInputArray } from "../hooks/useInputArray";
+import { useBgLightBlue } from "../hooks/useBgLightBlue";
 
 export default function Home() {
-  const [count, setCount] = useState(1);
-  const [ text, setText ] = useState("");
-  const [ isShow, setIsShow ] = useState(true);
-  const [ array, setArray ] = useState([]);
+  const { count, isShow, handleClick, handleDisplay } = useCounter();
+  const { text, array, handleChange, handleAdd } = useInputArray();
+  useBgLightBlue();
 
-  const handleClick = useCallback(() => {
-    if(count < 10){
-      setCount((prevCount) => prevCount + 1);
-    }
-  }, [count]);
-
-  const handleDisplay = useCallback(() => {
-    setIsShow((prevIsShow) => !prevIsShow);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.backgroundColor = "lightblue";
-    return () => {
-      document.body.style.backgroundColor = "";
-    }
-  }, []);
-
-  const handleChange = useCallback((e) => {
-    if(e.target.value.length > 5) {
-      alert("max 5");
-      return;
-    }
-    setText(e.target.value.trim());
-  }, []);
-
-  const handleAdd = useCallback(() => {
-    setArray((prevArray) => {
-      if (prevArray.some(item => item === text)){
-        alert("同じ要素がすでに存在します。")
-      }
-      return [...prevArray, text];
-    })
-  }, [text]);
   return (
     <div className={styles.container}>
       <Head>
