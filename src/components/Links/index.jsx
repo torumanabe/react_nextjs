@@ -1,6 +1,6 @@
 import styles from "./Links.module.css";
 
-export function Links({ items }) {
+export const Links = ({ items }) => {
   return (
     <div className={styles.grid}>
       { items.map((item) => {
